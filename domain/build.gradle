@@ -1,0 +1,12 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    def domainDependencies = rootProject.ext.domainDependencies
+    def domainTestDependencies = rootProject.ext.domainTestDependencies
+
+    implementation domainDependencies.kotlin
+    implementation domainDependencies.rxJava
+
+    testImplementation domainTestDependencies.jUnit
+    testImplementation domainTestDependencies.mockK
+}
