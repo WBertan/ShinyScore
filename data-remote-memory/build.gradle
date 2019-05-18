@@ -1,0 +1,14 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation project(':data')
+
+    def remoteMemoryDependencies = rootProject.ext.remoteMemoryDependencies
+    def remoteMemoryTestDependencies = rootProject.ext.remoteMemoryTestDependencies
+
+    implementation remoteMemoryDependencies.kotlin
+    implementation remoteMemoryDependencies.rxJava
+
+    testImplementation remoteMemoryTestDependencies.jUnit
+    testImplementation remoteMemoryTestDependencies.mockK
+}
