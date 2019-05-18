@@ -11,4 +11,11 @@ object UserMapper {
                 name,
                 "https://api.adorable.io/avatars/200/$name"
             )
+
+    val UserView.asUser: User
+        get() =
+            User(
+                id,
+                name
+            )
 }
