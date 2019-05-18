@@ -1,0 +1,14 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation project(':data')
+
+    def localMemoryDependencies = rootProject.ext.localMemoryDependencies
+    def localMemoryTestDependencies = rootProject.ext.localMemoryTestDependencies
+
+    implementation localMemoryDependencies.kotlin
+    implementation localMemoryDependencies.rxJava
+
+    testImplementation localMemoryTestDependencies.jUnit
+    testImplementation localMemoryTestDependencies.mockK
+}

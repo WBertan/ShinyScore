@@ -38,4 +38,14 @@ ext {
             jUnit: "junit:junit:$junit_version",
             mockK: "io.mockk:mockk:$mockk_version"
     ]
+
+    localMemoryDependencies = [
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            rxJava: "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    ]
+
+    localMemoryTestDependencies = [
+            jUnit: "junit:junit:$junit_version",
+            mockK: "io.mockk:mockk:$mockk_version"
+    ]
 }

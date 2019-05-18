@@ -1,7 +1,7 @@
 apply plugin: 'kotlin'
 
 dependencies {
-    implementation project(':domain')
+    api project(':domain')
 
     def dataDependencies = rootProject.ext.dataDependencies
     def dataTestDependencies = rootProject.ext.dataTestDependencies

@@ -1,2 +1,2 @@
-include ':app', ':domain', ':data'
+include ':app', ':domain', ':data', ':data-local-memory'
 rootProject.name='ShinyScore'
