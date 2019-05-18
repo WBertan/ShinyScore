@@ -4,6 +4,12 @@ ext {
     minSdkVersion = 21
     targetSdkVersion = 28
 
+    androidx = [
+            appcompat_version    : '1.0.2',
+            archComponent_version: '2.0.1',
+            lifecycle_version    : '2.0.0'
+    ]
+
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     //Gradle
@@ -14,6 +20,8 @@ ext {
 
     //Rx
     rxjava_version = '2.2.8'
+    rxkotlin_version = '2.3.0'
+    rxandroid_version = '2.1.1'
 
     //Network
     moshi_version = '1.8.0'
@@ -82,5 +90,24 @@ ext {
     remoteTestDependencies = [
             jUnit: "junit:junit:$junit_version",
             mockK: "io.mockk:mockk:$mockk_version"
+    ]
+
+    presentationKaptDependencies = [
+            lifecycleCompiler: "androidx.lifecycle:lifecycle-compiler:${androidx.lifecycle_version}"
+    ]
+
+    presentationDependencies = [
+            appCompat          : "androidx.appcompat:appcompat:${androidx.appcompat_version}",
+            kotlin             : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            lifecycleRuntime   : "androidx.lifecycle:lifecycle-runtime:${androidx.lifecycle_version}",
+            lifecycleExtensions: "androidx.lifecycle:lifecycle-extensions:${androidx.lifecycle_version}",
+            rxKotlin           : "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version",
+            rxAndroid          : "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    ]
+
+    presentationTestDependencies = [
+            jUnit          : "junit:junit:$junit_version",
+            mockK          : "io.mockk:mockk:$mockk_version",
+            archCoreTesting: "androidx.arch.core:core-testing:${androidx.archComponent_version}"
     ]
 }
