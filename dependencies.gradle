@@ -11,8 +11,7 @@ ext {
             core_version         : '1.0.1',
             test_version         : '1.1.1',
             testEspresso_version : '3.1.1',
-            constraint_version   : '1.1.2',
-            testFragment_version : '1.1.0-alpha09'
+            constraint_version   : '1.1.2'
     ]
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -156,8 +155,7 @@ ext {
             mockK          : "io.mockk:mockk:$mockk_version",
             archCoreTesting: "androidx.arch.core:core-testing:${androidx.archComponent_version}",
             koinTest       : "org.koin:koin-test:$koin_version",
-            robolectric    : "org.robolectric:robolectric:$robolectric_version",
-            testFragment   : "androidx.fragment:fragment-testing:${androidx.testFragment_version}"
+            robolectric    : "org.robolectric:robolectric:$robolectric_version"
     ]
 
     appAndroidTestDependencies = [

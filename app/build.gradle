@@ -68,7 +68,6 @@ dependencies {
     testImplementation appTestDependencies.archCoreTesting
     testImplementation appTestDependencies.koinTest
     testImplementation appTestDependencies.robolectric
-    testImplementation appTestDependencies.testFragment
 
     androidTestImplementation appAndroidTestDependencies.testRunner
     androidTestImplementation appAndroidTestDependencies.testRules

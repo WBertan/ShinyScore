@@ -39,7 +39,7 @@ class RemoteDataSourceImplSpec {
 
         val result = dataSource.getReports("userId").test()
 
-        result.assertCompletedValue(listOf(creditReport.creditReportInfo.asReportEntity))
+        result.assertCompletedValue(listOf(creditReport.creditReportInfo.asReportEntity.copy(userId = "userId")))
 
         unmockkStatic(UUID::class)
     }

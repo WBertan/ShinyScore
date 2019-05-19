@@ -27,7 +27,7 @@ import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.startKoin
 import org.koin.standalone.StandAloneContext.stopKoin
-import org.robolectric.Robolectric
+import org.robolectric.Robolectric.buildActivity
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
@@ -73,7 +73,7 @@ class DashboardActivitySpec {
     }
 
     private fun createActivity(): ActivityController<DashboardActivity> =
-        Robolectric.buildActivity(DashboardActivity::class.java)
+        buildActivity(DashboardActivity::class.java)
             .also { activityController = it }
 
     private fun assertGroupVisibility(
