@@ -13,6 +13,11 @@ import kotlinx.android.synthetic.main.activity_dashboard.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardActivity : AppCompatActivity() {
+    companion object {
+        //TODO(We need to recover the real userId after the Login/Register)
+        private const val USER_ID = "someUserId"
+    }
+
     private val userViewModel: UserViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +29,7 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        //TODO(We need to recover the real userId after the Login/Register)
-        userViewModel.getUser("someUserId")
+        userViewModel.getUser(USER_ID)
     }
 
     private fun handleUserState(viewState: ViewState<UserView>) =
@@ -54,6 +58,12 @@ class DashboardActivity : AppCompatActivity() {
     private fun populateUserView(userView: UserView) {
         userName.text = userView.name
         userAvatar.loadUrl(userView.avatar)
+
+        supportFragmentManager
+            .takeIf { it.findFragmentByTag("user_score") == null }
+            ?.beginTransaction()
+            ?.add(R.id.frameUserScore, ScoreFragment.newInstance(USER_ID), "user_score")
+            ?.commit()
     }
 
     private fun populateErrorView(errorMessage: String) {

@@ -1,5 +1,9 @@
 package com.bertan.shinyscore.ui.dashboard
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -9,9 +13,8 @@ import com.bertan.shinyscore.R
 import com.bertan.shinyscore.presentation.model.UserView
 import com.bertan.shinyscore.presentation.state.ViewState
 import com.bertan.shinyscore.presentation.vm.UserViewModel
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.spyk
+import io.mockk.*
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -21,6 +24,16 @@ import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.loadKoinModules
 
 class DashboardActivityUISpec {
+    object MockScoreFragment : ScoreFragment() {
+        val scoreFragmentInnerId: Int = View.generateViewId()
+        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            View(container?.context).apply {
+                id = scoreFragmentInnerId
+            }
+
+        override fun onViewCreated(view: View, savedInstanceState: Bundle?) = Unit
+    }
+
     private val liveData: MutableLiveData<ViewState<UserView>> = MutableLiveData()
     private val userViewModel: UserViewModel = spyk(UserViewModel(mockk(relaxed = true), mockk(relaxed = true))) {
         every { getState() } returns liveData
@@ -39,6 +52,13 @@ class DashboardActivityUISpec {
     @Before
     fun setup() {
         loadKoinModules(listOf(testModule))
+        mockkObject(ScoreFragment)
+        every { ScoreFragment.newInstance(any()) } returns MockScoreFragment
+    }
+
+    @After
+    fun tearDown() {
+        unmockkObject(ScoreFragment)
     }
 
     private fun launchActivity() = activityRule.launchActivity(null)
@@ -93,6 +113,8 @@ class DashboardActivityUISpec {
         )
         onView(withId(R.id.userName))
             .check(matches(withText("dummyName")))
+        onView(withId(MockScoreFragment.scoreFragmentInnerId))
+            .check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
     }
 
     @Test
