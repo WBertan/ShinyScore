@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bertan.shinyscore.R
@@ -82,20 +83,25 @@ open class ScoreFragment : Fragment() {
     }
 
     private fun populateReportView(reportView: ReportView) {
-        currentScore.text = reportView.currentScore.toString()
-        scoreBottomText.text = getString(R.string.score_component_bottom_text, reportView.maxScore)
-
         val (current, max, min) =
             Triple(
                 reportView.currentScore.toInt(),
                 reportView.maxScore.toInt(),
                 reportView.minScore.toInt()
             )
+        val scoreProgress = ((current - min) * 100) / (max - min)
+
+        currentScore.apply {
+            text = reportView.currentScore.toString()
+            setTextColor(getScoreTextColor(scoreProgress))
+        }
+        scoreBottomText.text = getString(R.string.score_component_bottom_text, reportView.maxScore)
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setScore(current, max, min)
         } else {
-            setScoreLegacy(current, max, min)
+            setScoreLegacy(scoreProgress)
         }
     }
 
@@ -106,10 +112,43 @@ open class ScoreFragment : Fragment() {
         scoreProgress.progress = current
     }
 
-    private fun setScoreLegacy(current: Int, max: Int, min: Int) {
-        val progress = ((current - min) * 100) / (max - min)
+    private fun setScoreLegacy(progress: Int) {
         scoreProgress.progress = progress
     }
+
+    private fun getScoreTextColor(progressValue: Int): Int {
+        val progressPercentage: Float = progressValue / 100f
+
+        val (colorStart, colorMiddle, colorEnd) =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                getScoreComponentColors()
+            } else {
+                getScoreComponentColorsLegacy()
+            }
+
+        return if (progressPercentage < 0.5) {
+            val factor = progressPercentage / 0.5f
+            ColorUtils.blendARGB(colorStart, colorMiddle, factor)
+        } else {
+            val factor = (progressPercentage - 0.5f) / 0.5f
+            ColorUtils.blendARGB(colorMiddle, colorEnd, factor)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun getScoreComponentColors(): Triple<Int, Int, Int> =
+        Triple(
+            resources.getColorStateList(R.color.score_component_start_gradient, activity?.theme).defaultColor,
+            resources.getColorStateList(R.color.score_component_middle_gradient, activity?.theme).defaultColor,
+            resources.getColorStateList(R.color.score_component_end_gradient, activity?.theme).defaultColor
+        )
+
+    private fun getScoreComponentColorsLegacy(): Triple<Int, Int, Int> =
+        Triple(
+            resources.getColorStateList(R.color.score_component_start_gradient).defaultColor,
+            resources.getColorStateList(R.color.score_component_middle_gradient).defaultColor,
+            resources.getColorStateList(R.color.score_component_end_gradient).defaultColor
+        )
 
     private fun populateErrorView(errorMessage: String) {
         errorView.text = errorMessage

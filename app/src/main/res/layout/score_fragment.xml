@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:drawableTop="@drawable/image_error_placeholder"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,13 +25,14 @@
         android:drawableTop="@drawable/ic_loading"
         android:gravity="center"
         android:text="@string/dashboard_loading_description"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
+        android:id="@+id/score_component"
         layout="@layout/score_component"
         android:layout_width="250dp"
         android:layout_height="250dp"
@@ -45,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="currentScore"
+        app:constraint_referenced_ids="score_component"
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Group

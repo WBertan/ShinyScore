@@ -9,7 +9,7 @@ import io.reactivex.Observable
 class RemoteDataSourceImpl(private val service: ShinyScoreService) : RemoteDataSource {
     override fun getReports(userId: String): Observable<List<ReportEntity>> =
         service.getCreditReport(userId)
-            .map { listOf(it.creditReportInfo.asReportEntity) }
+            .map { listOf(it.creditReportInfo.asReportEntity.copy(userId = userId)) }
             .onErrorResumeNext { error: Throwable ->
                 Observable.error(RemoteDataSource.Error.GetReportsFailed(userId, error.localizedMessage))
             }

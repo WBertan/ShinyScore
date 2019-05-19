@@ -1,6 +1,7 @@
 package com.bertan.shinyscore.di
 
 import com.bertan.shinyscore.BuildConfig
+import com.bertan.shinyscore.data.remote.repository.RemoteDataSourceImpl
 import com.bertan.shinyscore.data.remote.service.ShinyScoreServiceFactory
 import com.bertan.shinyscore.data.repository.DataRepository
 import com.bertan.shinyscore.data.repository.LocalDataSource
@@ -17,17 +18,17 @@ val dataModule: Module = module {
             isDebug = BuildConfig.DEBUG
         )
     }
-//    single {
-//        RemoteDataSourceImpl(
-//            service = get()
-//        ) as RemoteDataSource
-//    }
     single {
-        RemoteDataSourceMemoryImpl(
-            minReports = 1,
-            maxReports = 100
+        RemoteDataSourceImpl(
+            service = get()
         ) as RemoteDataSource
     }
+//    single {
+//        RemoteDataSourceMemoryImpl(
+//            minReports = 1,
+//            maxReports = 100
+//        ) as RemoteDataSource
+//    }
     single {
         LocalDataSourceMemoryImpl() as LocalDataSource
     }

@@ -3,6 +3,7 @@ package com.bertan.shinyscore.data.remote.service
 import com.bertan.shinyscore.data.remote.model.CreditReport
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ShinyScoreService {
     companion object {
@@ -10,5 +11,5 @@ interface ShinyScoreService {
     }
 
     @GET("values")
-    fun getCreditReport(userId: String): Observable<CreditReport>
+    fun getCreditReport(@Query("userId") userId: String): Observable<CreditReport>
 }
