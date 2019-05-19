@@ -1,4 +1,4 @@
-package com.bertan.shinyscore.ui.activity
+package com.bertan.shinyscore.ui.dashboard
 
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -10,7 +10,6 @@ import com.bertan.shinyscore.TestApplication
 import com.bertan.shinyscore.presentation.model.UserView
 import com.bertan.shinyscore.presentation.state.ViewState
 import com.bertan.shinyscore.presentation.vm.UserViewModel
-import com.bertan.shinyscore.ui.dashboard.DashboardActivity
 import com.squareup.picasso.Picasso
 import io.mockk.every
 import io.mockk.mockk
