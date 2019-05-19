@@ -17,7 +17,7 @@ ext {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     //Gradle
-    gradleBuildTools = '3.5.0-beta01'
+    gradleBuildTools = '3.4.0'
 
     //Kotlin
     kotlin_version = '1.3.31'
@@ -45,6 +45,9 @@ ext {
 
     //DI
     koin_version = '1.0.2'
+
+    //UI
+    material_version = '1.0.0'
 
     domainDependencies = [
             kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -143,7 +146,8 @@ ext {
             koinAndroid          : "org.koin:koin-android:$koin_version",
             koinAndroidxScope    : "org.koin:koin-androidx-scope:$koin_version",
             koinAndroidxViewModel: "org.koin:koin-androidx-viewmodel:$koin_version",
-            constraintLayout     : "androidx.constraintlayout:constraintlayout:${androidx.constraint_version}"
+            constraintLayout     : "androidx.constraintlayout:constraintlayout:${androidx.constraint_version}",
+            materialDesign       : "com.google.android.material:material:$material_version"
     ]
 
     appTestDependencies = [

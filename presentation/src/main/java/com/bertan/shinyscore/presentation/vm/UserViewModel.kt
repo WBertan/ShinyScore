@@ -2,6 +2,8 @@ package com.bertan.shinyscore.presentation.vm
 
 import com.bertan.shinyscore.domain.interactor.user.AddUser
 import com.bertan.shinyscore.domain.interactor.user.GetUser
+import com.bertan.shinyscore.domain.model.User
+import com.bertan.shinyscore.domain.repository.UserRepository
 import com.bertan.shinyscore.presentation.mapper.UserMapper.asUser
 import com.bertan.shinyscore.presentation.mapper.UserMapper.asUserView
 import com.bertan.shinyscore.presentation.model.UserView
@@ -18,8 +20,19 @@ class UserViewModel(
 
         getUserUseCase.execute(
             GetUser.Param(userId),
-            onNext = { user -> user.asUserView.postSuccess() },
-            onError = { it.postError("Failed to load User($userId)!") }
+            onNext = { user ->
+                user.asUserView.postSuccess()
+            },
+            onError = {
+                when (it) {
+                    is UserRepository.Error.UserNotFound ->
+                        User(
+                            "wonderful-user-id",
+                            "Wonderful User!"
+                        ).asUserView.postSuccess()
+                    else -> it.postError("Failed to load User($userId)!")
+                }
+            }
         )
     }
 

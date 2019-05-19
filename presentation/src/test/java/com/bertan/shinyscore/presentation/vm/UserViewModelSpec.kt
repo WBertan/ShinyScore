@@ -7,6 +7,7 @@ import androidx.lifecycle.LifecycleRegistry
 import com.bertan.shinyscore.domain.interactor.user.AddUser
 import com.bertan.shinyscore.domain.interactor.user.GetUser
 import com.bertan.shinyscore.domain.model.User
+import com.bertan.shinyscore.domain.repository.UserRepository
 import com.bertan.shinyscore.presentation.mapper.UserMapper.asUserView
 import com.bertan.shinyscore.presentation.state.ViewState
 import com.bertan.shinyscore.presentation.test.UserDomainFactory
@@ -83,6 +84,20 @@ class UserViewModelSpec {
             ViewState.Error("Failed to load User(userId)!", dummyError),
             userViewModel.getState().value
         )
+    }
+
+    @Test
+    fun `given a user not found failure use case when executes getUser it should return a default user`() {
+        val defaultUser = User("wonderful-user-id", "Wonderful User!")
+        val dummyError = UserRepository.Error.UserNotFound("userId")
+        every { getUserUseCase.execute(any(), any(), captureLambda(), any()) } answers {
+            lambda<Function1<Throwable, Unit>>().invoke(dummyError)
+            mockk()
+        }
+
+        userViewModel.getUser("userId")
+
+        assertEquals(ViewState.Success(defaultUser.asUserView), userViewModel.getState().value)
     }
 
     @Test

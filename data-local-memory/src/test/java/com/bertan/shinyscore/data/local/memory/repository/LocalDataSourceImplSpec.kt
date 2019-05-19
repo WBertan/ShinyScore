@@ -2,7 +2,7 @@ package com.bertan.shinyscore.data.local.memory.repository
 
 import com.bertan.shinyscore.data.local.memory.test.ReportDataFactory
 import com.bertan.shinyscore.data.local.memory.test.UserDataFactory
-import com.bertan.shinyscore.data.model.UserEntity
+import com.bertan.shinyscore.domain.repository.UserRepository
 import io.reactivex.observers.TestObserver
 import org.junit.Before
 import org.junit.Test
@@ -32,25 +32,14 @@ class LocalDataSourceImplSpec {
         result.assertCompletedValue(user)
     }
 
-//    @Test
-//    fun `given a not found response when getUser it should completes and return exception`() {
-//        val user = UserDataFactory.get().copy(id = "userId")
-//
-//        dataSource.addUser(user).test()
-//        val result = dataSource.getUser("notFoundId").test()
-//
-//        result.assertError(UserRepository.Error.UserNotFound("notFoundId"))
-//    }
-
     @Test
-    fun `given a not found response when getUser it should completes and return default user`() {
+    fun `given a not found response when getUser it should completes and return exception`() {
         val user = UserDataFactory.get().copy(id = "userId")
-        val defaultUser = UserEntity("wonderful-user-id", "Wonderful User")
 
         dataSource.addUser(user).test()
         val result = dataSource.getUser("notFoundId").test()
 
-        result.assertCompletedValue(defaultUser)
+        result.assertError(UserRepository.Error.UserNotFound("notFoundId"))
     }
 
     @Test

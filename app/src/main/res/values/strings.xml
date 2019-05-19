@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ShinyScore</string>
+    <string name="dashboard_description">Here it is, your shiny score!</string>
+    <string name="dashboard_greeting_title">Hello</string>
+    <string name="content_description_user_avatar">User avatar</string>
+    <string name="dashboard_loading_description">Loading your information!</string>
 </resources>
