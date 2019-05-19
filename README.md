@@ -20,7 +20,7 @@ The project have different modules:
 
 The `models` was applied as much as possible the Clean Architecture way, where each module have their own `model` representation with the required `mappers` between them (the "exception" is `app` module where "reuse" the `presentation`'s model)
 
-It is understandable the approaches used here are an educational and "demoable" purpose, and in a real application some layers/representation can be "merged" together - as an example often implementation merges the `app` with the `presentation`. As the same case, in a real world after some iterations we could have the necessity of splitting modules.
+It is understandable the approaches used here are an educational and "demoable" purpose, and in a real application some layers/representation can be "merged" together - as an example often implementation merges the `app` with the `presentation`. As the same case, in a real world after some iterations, we could have the necessity of splitting modules.
 
 Tried as much to use TDD as possible, I believe the coverage of the project is high, I did not generate the report, yet!
 
@@ -76,22 +76,22 @@ __NOTE__: It is important to use one OR another, not both at the same time ;)
 
 * __RxJava__: More familiar with and most used in commercial applications. Was between this and Coroutines, but already picked the AndroidX as "leaving the comfort zone", so leaving the use of Coroutines for a Future application.
 * __jUnit 4__: More familiar with and most used.
-* __MockK__: This one is huge by affinity (and love), I was tired of `Mockito` not allowing me do some mocks, at the beginning also not working properly with Kotlin (where was in the end using along side other libraries), so cahnged everything and start to use MockK, and this changed my life! At my point of view, the test looks more "elegant", the DSL provided I feel more friendly. 
+* __MockK__: This one is huge by affinity (and love), I was tired of `Mockito` not allowing me to do some mocks, at the beginning also not working properly with Kotlin (where was, in the end, using alongside other libraries), so changed everything and start to use MockK, and this changed my life! At my point of view, the test looks more "elegant", the DSL provided I feel more friendly. 
 * __Moshi__: Not by affinity, since I have more affinity with `Gson`, using this because I saw in some Slack Channel someone speaking about it and went to try it out. 
 * __okHttp__: One of the most used, using to create the client used with the `Retrofit`, and to add a logging interceptor when I'm in DEBUG.
-* __Retrofit__: Choose by affinity, used to make http requests.
+* __Retrofit__: Choose by affinity, used to make HTTP requests.
 * __Picasso__: Whenever I need to load an URL into an `imageView`, first in my mind came `Picasso`, I indeed used before `Glide`, but usually pick `Picasso`, no strong reason.
-* __Koin__: Have in the past more affinity with `Dagger`, try recently `Koin` and my world changed... In my opnion way more concise to use with the DSL, nice to create a factory for `viewModel`, and the code looks more "clean". I'm still a "beginner" with it, but so far, didn't have hard or complex issues (way different than starting with Dagger for example).
-* __Roboletric__: It is a story of love and hate, I love in how easy is to use, to run a test in different configurations, api levels, and everything. But at the same time I hate the increase of timings to run it (had to confess it gets way faster than some previous versions).   
+* __Koin__: Have in the past more affinity with `Dagger`, try recently `Koin` and my world changed... In my opinion way more concise to use with the DSL, nice to create a factory for `ViewModel`, and the code looks more "clean". I'm still a "beginner" with it, but so far, didn't have hard or complex issues (way different than starting with Dagger for example).
+* __Roboletric__: It is a story of love and hate. I love in how easy it is to use, to run a test in different configurations, api levels, and everything. But at the same time, I hate the increase of timings to run it (had to confess it gets way faster than some previous versions).   
 * __Espresso__: Having some affinity with Espresso, already spend some times writing my own Matchers, for me the tests with Espresso are "clean", you can see straight away what it is looking for and what is checking.
 
 # Challenges
 
-I decide to challenge myself in some places over this demo application. Could have used what I was more familiar, and make it quickier, but no, why make it trivial and not expand our knowledge? :)
+I decide to challenge myself in some places over this demo application. Could have used what I was more familiar, and make it quicker, but no, why make it trivial and not expand our knowledge? :)
 
 Using AndroidX instead of Support libraries was one of the challenges, not so much since it works "smooth", until getting issues with the libraries used on the tests (the Fragments cases explained above).
 
-Had issues using the Kotlin Synthetic Bindings: I like to use `groups` from `ContraintLayout`, so I used here some groups to represent the `Loading`, `Success` and `Error` states, handling in the Activity the visibility of each state. So far so good, until I did the same in the Fragment, which the Activity loads... Weird behaviours were happening because both `groups` have the same ids (being used in different classes and proper referenced by the synthetic import), but in Runtime, it went in crazy mode. Got me for some good time this one, until I realize the issue and ending in rename the groups within the Fragment...
+Had issues using the Kotlin Synthetic Bindings: I like to use `groups` from `ContraintLayout`, so I used here some groups to represent the `Loading`, `Success` and `Error` states, handling in the Activity the visibility of each state. So far so good, until I did the same in the Fragment, which the Activity loads... Weird behaviours were happening because both `groups` have the same ids (being used in different classes and properly referenced by the synthetic import), but in Runtime, it went in crazy mode. Got me for some good time this one, until I realize the issue and ending in rename the groups within the Fragment...
 
 - I think this one I could "pass" if went to use the "shiny" new `ConstraintLayoutStates`.
 
@@ -99,7 +99,7 @@ Was a huge challenge trying to get the right colour for the credit score text...
 
 # Future
 
-- It is planned to add in the demo app a Login/Register screen as the first contact with the User. - This is prepared on the layers below `app` module, where already have the model, use case, data and presentation to have the interaction, need to hook UI to, at least, store locally those information.
+- It is planned to add in the demo app a Login/Register screen as the first contact with the User. - This is prepared on the layers below `app` module, where already have the model, use case, data and presentation to have the interaction, need to hook UI to, at least, store those information locally.
 
 - Complete the test suite, having tests for the Fragment and its components.
 
