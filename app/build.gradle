@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -20,14 +21,55 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation project(':presentation')
+    implementation project(':data-remote')
+    implementation project(':data-remote-memory')
+    implementation project(':data-local-memory')
+    implementation project(':data')
+    implementation project(':domain')
+
+    def appKaptDependencies = rootProject.ext.appKaptDependencies
+    def appDependencies = rootProject.ext.appDependencies
+    def appTestDependencies = rootProject.ext.appTestDependencies
+    def appAndroidTestDependencies = rootProject.ext.appAndroidTestDependencies
+
+    kapt(appKaptDependencies.lifecycleCompiler)
+
+    implementation appDependencies.coreKtx
+    implementation appDependencies.appCompat
+    implementation appDependencies.kotlin
+    implementation appDependencies.lifecycleRuntime
+    implementation appDependencies.lifecycleExtensions
+    implementation appDependencies.rxKotlin
+    implementation appDependencies.rxAndroid
+    implementation appDependencies.picasso
+    implementation appDependencies.timber
+    implementation appDependencies.koinCore
+    implementation appDependencies.koinAndroid
+    implementation appDependencies.koinAndroidxScope
+    implementation appDependencies.koinAndroidxViewModel
+    implementation appDependencies.constraintLayout
+
+    testImplementation appTestDependencies.jUnit
+    testImplementation appTestDependencies.mockK
+    testImplementation appTestDependencies.archCoreTesting
+    testImplementation appTestDependencies.koinTest
+    testImplementation appTestDependencies.robolectric
+
+    androidTestImplementation appAndroidTestDependencies.testRunner
+    androidTestImplementation appAndroidTestDependencies.testRules
+    androidTestImplementation appAndroidTestDependencies.testEspressoCore
+    androidTestImplementation appAndroidTestDependencies.mockK
 }

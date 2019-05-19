@@ -7,7 +7,11 @@ ext {
     androidx = [
             appcompat_version    : '1.0.2',
             archComponent_version: '2.0.1',
-            lifecycle_version    : '2.0.0'
+            lifecycle_version    : '2.0.0',
+            core_version         : '1.0.1',
+            test_version         : '1.1.1',
+            testEspresso_version : '3.1.1',
+            constraint_version   : '1.1.2',
     ]
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -31,6 +35,16 @@ ext {
     //Tests
     junit_version = '4.12'
     mockk_version = '1.9.3'
+    robolectric_version = '4.2'
+
+    //Logs
+    timber_version = '4.7.1'
+
+    //Image Loading
+    picasso_version = '2.71828'
+
+    //DI
+    koin_version = '1.0.2'
 
     domainDependencies = [
             kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -109,5 +123,41 @@ ext {
             jUnit          : "junit:junit:$junit_version",
             mockK          : "io.mockk:mockk:$mockk_version",
             archCoreTesting: "androidx.arch.core:core-testing:${androidx.archComponent_version}"
+    ]
+
+    appKaptDependencies = [
+            lifecycleCompiler: "androidx.lifecycle:lifecycle-compiler:${androidx.lifecycle_version}",
+    ]
+
+    appDependencies = [
+            coreKtx              : "androidx.core:core-ktx:${androidx.core_version}",
+            appCompat            : "androidx.appcompat:appcompat:${androidx.appcompat_version}",
+            kotlin               : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+            lifecycleRuntime     : "androidx.lifecycle:lifecycle-runtime:${androidx.lifecycle_version}",
+            lifecycleExtensions  : "androidx.lifecycle:lifecycle-extensions:${androidx.lifecycle_version}",
+            rxKotlin             : "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version",
+            rxAndroid            : "io.reactivex.rxjava2:rxandroid:$rxandroid_version",
+            picasso              : "com.squareup.picasso:picasso:$picasso_version",
+            timber               : "com.jakewharton.timber:timber:$timber_version",
+            koinCore             : "org.koin:koin-core:$koin_version",
+            koinAndroid          : "org.koin:koin-android:$koin_version",
+            koinAndroidxScope    : "org.koin:koin-androidx-scope:$koin_version",
+            koinAndroidxViewModel: "org.koin:koin-androidx-viewmodel:$koin_version",
+            constraintLayout     : "androidx.constraintlayout:constraintlayout:${androidx.constraint_version}"
+    ]
+
+    appTestDependencies = [
+            jUnit          : "junit:junit:$junit_version",
+            mockK          : "io.mockk:mockk:$mockk_version",
+            archCoreTesting: "androidx.arch.core:core-testing:${androidx.archComponent_version}",
+            koinTest       : "org.koin:koin-test:$koin_version",
+            robolectric    : "org.robolectric:robolectric:$robolectric_version"
+    ]
+
+    appAndroidTestDependencies = [
+            testRunner      : "androidx.test:runner:${androidx.test_version}",
+            testRules       : "androidx.test:rules:${androidx.test_version}",
+            testEspressoCore: "androidx.test.espresso:espresso-core:${androidx.testEspresso_version}",
+            mockK           : "io.mockk:mockk-android:$mockk_version"
     ]
 }
