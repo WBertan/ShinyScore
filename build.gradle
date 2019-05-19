@@ -17,6 +17,14 @@ buildscript {
 }
 
 allprojects {
+    //Required to fix issue with MockK using a new version of objenesis with breaking changes.
+    //  Expecting in the future for MockK to fix it and remove this code.
+    //  https://github.com/mockk/mockk/issues/281
+    configurations.all {
+        resolutionStrategy {
+            force("org.objenesis:objenesis:2.6")
+        }
+    }
     repositories {
         google()
         jcenter()
