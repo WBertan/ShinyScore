@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="score_component_stroke">#727272</color>
+    <color name="score_component_start_gradient">#FF9800</color>
+    <color name="score_component_middle_gradient">#FFEB3B</color>
+    <color name="score_component_end_gradient">#8BC34A</color>
 </resources>

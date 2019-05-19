@@ -10,7 +10,7 @@ class RemoteDataSourceImpl(private val minReports: Int, private val maxReports: 
     private fun randomReports(userId: String): List<ReportEntity> =
         List(Random.nextInt(minReports, maxReports)) {
             val maxScore = Random.nextLong(500, 1000)
-            val minScore = Random.nextLong(0, maxScore)
+            val minScore = 0L
             val currentScore = Random.nextLong(minScore, maxScore)
             ReportEntity(
                 UUID.randomUUID().toString(),

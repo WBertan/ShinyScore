@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">ShinyScore</string>
-    <string name="dashboard_description">Here it is, your shiny score!</string>
+    <string name="dashboard_description">\"A score that shiny don\'t cloud your future\"\n- Some shiny person</string>
     <string name="dashboard_greeting_title">Hello</string>
     <string name="content_description_user_avatar">User avatar</string>
     <string name="dashboard_loading_description">Loading your information!</string>
+    <string name="score_component_upper_text">Your credit score is</string>
+    <string name="score_component_bottom_text">out of %1$d</string>
+    <string name="score_fragment_empty_current_score">WAIT!</string>
+    <string name="score_fragment_empty_current_score_description">You don\'t have a report!</string>
 </resources>
